@@ -1,0 +1,3 @@
+[submodule "utils/propertree"]
+	path = utils/propertree
+	url = git@github.com:corpnewt/ProperTree.git
