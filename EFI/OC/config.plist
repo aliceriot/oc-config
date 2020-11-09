@@ -181,20 +181,24 @@
 			<false/>
 			<key>ForceExitBootServices</key>
 			<false/>
-			<key>ProtectCsmRegion</key>
-			<false/>
 			<key>ProvideCustomSlide</key>
 			<true/>
 			<key>SetupVirtualMap</key>
 			<true/>
-			<key>ShrinkMemoryMap</key>
-			<false/>
 			<key>SignalAppleOS</key>
 			<false/>
 			<key>SyncRuntimePermissions</key>
 			<true/>
 			<key>RebuildAppleMemoryMap</key>
 			<true/>
+			<key>ProtectMemoryRegions</key>
+			<false/>
+			<key>ProtectSecureBoot</key>
+			<false/>
+			<key>ProtectUefiServices</key>
+			<true/>
+			<key>ProvideMaxSlide</key>
+			<integer>0</integer>
 		</dict>
 	</dict>
 	<key>DeviceProperties</key>
@@ -368,24 +372,6 @@
 				<key>BundlePath</key>
 				<string>WhateverGreen.kext</string>
 			</dict>
-			<dict>
-				<key>Comment</key>
-				<string></string>
-				<key>MaxKernel</key>
-				<string></string>
-				<key>PlistPath</key>
-				<string>Contents/Info.plist</string>
-				<key>Enabled</key>
-				<true/>
-				<key>MinKernel</key>
-				<string></string>
-				<key>ExecutablePath</key>
-				<string></string>
-				<key>Arch</key>
-				<string>Any</string>
-				<key>BundlePath</key>
-				<string>XHCI-unsupported.kext</string>
-			</dict>
 		</array>
 		<key>Patch</key>
 		<array>
@@ -505,7 +491,7 @@
 		<key>Quirks</key>
 		<dict>
 			<key>AppleCpuPmCfgLock</key>
-			<true/>
+			<false/>
 			<key>AppleXcpmCfgLock</key>
 			<true/>
 			<key>AppleXcpmExtraMsrs</key>
@@ -516,8 +502,6 @@
 			<false/>
 			<key>DisableIoMapper</key>
 			<true/>
-			<key>DummyPowerManagement</key>
-			<false/>
 			<key>ExternalDiskIcons</key>
 			<false/>
 			<key>IncreasePciBarSize</key>
@@ -532,6 +516,10 @@
 			<false/>
 			<key>XhciPortLimit</key>
 			<true/>
+			<key>LegacyCommpage</key>
+			<false/>
+			<key>ForceSecureBootScheme</key>
+			<false/>
 		</dict>
 	</dict>
 	<key>Misc</key>
@@ -543,18 +531,20 @@
 		<dict>
 			<key>HibernateMode</key>
 			<string>None</string>
-			<key>HideSelf</key>
-			<true/>
 			<key>PollAppleHotKeys</key>
-			<false/>
+			<true/>
 			<key>ShowPicker</key>
 			<true/>
 			<key>TakeoffDelay</key>
 			<integer>0</integer>
 			<key>Timeout</key>
 			<integer>5</integer>
-			<key>UsePicker</key>
-			<true/>
+			<key>PickerMode</key>
+			<string>Builtin</string>
+			<key>HideAuxiliary</key>
+			<false/>
+			<key>PickerAudioAssist</key>
+			<false/>
 		</dict>
 		<key>Debug</key>
 		<dict>
@@ -565,7 +555,11 @@
 			<key>DisplayLevel</key>
 			<integer>2147483650</integer>
 			<key>Target</key>
-			<integer>83</integer>
+			<integer>67</integer>
+			<key>AppleDebug</key>
+			<true/>
+			<key>ApplePanic</key>
+			<true/>
 		</dict>
 		<key>Security</key>
 		<dict>
@@ -579,12 +573,16 @@
 			<integer>6</integer>
 			<key>HaltLevel</key>
 			<integer>2147483648</integer>
-			<key>RequireSignature</key>
-			<false/>
-			<key>RequireVault</key>
-			<false/>
 			<key>ScanPolicy</key>
 			<integer>0</integer>
+			<key>ApECID</key>
+			<integer>0</integer>
+			<key>DmgLoading</key>
+			<string>Signed</string>
+			<key>EnablePassword</key>
+			<false/>
+			<key>Vault</key>
+			<string>Optional</string>
 		</dict>
 		<key>Tools</key>
 		<array>
@@ -824,7 +822,7 @@
 				<key>boot-args</key>
 				<string>-v keepsyms=1 debug=0x100 alcid=1</string>
 				<key>csr-active-config</key>
-				<data>MAAAAA==</data>
+				<data>AAAAAA==</data>
 				<key>prev-lang:kbd</key>
 				<data>ZW4tVVM6MA==</data>
 			</dict>
@@ -868,6 +866,8 @@
 			<string>C02V8DYQJ1GJ</string>
 			<key>SystemUUID</key>
 			<string>DB7E1816-6AEF-4A83-A516-C14528E61927</string>
+			<key>SystemMemoryStatus</key>
+			<string>Auto</string>
 		</dict>
 		<key>UpdateDataHub</key>
 		<true/>
@@ -884,11 +884,8 @@
 		<true/>
 		<key>Drivers</key>
 		<array>
-			<string>ApfsDriverLoader.efi</string>
-			<string>FwRuntimeServices.efi</string>
 			<string>HfsPlus.efi</string>
 			<string>OpenRuntime.efi</string>
-			<string>VBoxHfs.efi</string>
 		</array>
 		<key>Input</key>
 		<dict>
@@ -908,6 +905,8 @@
 			<string></string>
 			<key>TimerResolution</key>
 			<integer>50000</integer>
+			<key>KeyFiltering</key>
+			<false/>
 		</dict>
 		<key>Protocols</key>
 		<dict>
@@ -940,29 +939,92 @@
 		</dict>
 		<key>Quirks</key>
 		<dict>
-			<key>AvoidHighAlloc</key>
-			<true/>
-			<key>ClearScreenOnModeSwitch</key>
-			<false/>
 			<key>ExitBootServicesDelay</key>
 			<integer>0</integer>
 			<key>IgnoreInvalidFlexRatio</key>
 			<false/>
-			<key>IgnoreTextInGraphics</key>
+			<key>ReleaseUsbOwnership</key>
 			<false/>
+			<key>RequestBootVarRouting</key>
+			<true/>
+			<key>UnblockFsConnect</key>
+			<false/>
+			<key>DeduplicateBootOrder</key>
+			<true/>
+			<key>TscSyncTimeout</key>
+			<integer>0</integer>
+		</dict>
+		<key>APFS</key>
+		<dict>
+			<key>EnableJumpstart</key>
+			<true/>
+			<key>HideVerbose</key>
+			<true/>
+			<key>JumpstartHotPlug</key>
+			<false/>
+			<key>MinDate</key>
+			<integer>0</integer>
+			<key>MinVersion</key>
+			<integer>0</integer>
+		</dict>
+		<key>Output</key>
+		<dict>
 			<key>ProvideConsoleGop</key>
 			<true/>
-			<key>ReleaseUsbOwnership</key>
+			<key>TextRenderer</key>
+			<string>BuiltinGraphics</string>
+			<key>ConsoleMode</key>
+			<string>blank</string>
+			<key>ForceResolution</key>
+			<false/>
+			<key>ClearScreenOnModeSwitch</key>
+			<false/>
+			<key>IgnoreTextInGraphics</key>
+			<false/>
+			<key>DirectGopRendering</key>
+			<false/>
+			<key>ReconnectOnResChange</key>
 			<false/>
 			<key>ReplaceTabWithSpace</key>
 			<false/>
-			<key>RequestBootVarFallback</key>
+			<key>UgaPassThrough</key>
+			<false/>
+		</dict>
+		<key>ProtocolOverrides</key>
+		<dict>
+			<key>FirmwareVolume</key>
 			<true/>
-			<key>RequestBootVarRouting</key>
-			<true/>
-			<key>SanitiseClearScreen</key>
-			<true/>
-			<key>UnblockFsConnect</key>
+			<key>AppleAudio</key>
+			<false/>
+			<key>AppleBootPolicy</key>
+			<false/>
+			<key>AppleDebugLog</key>
+			<false/>
+			<key>AppleEvent</key>
+			<false/>
+			<key>AppleFramebufferInfo</key>
+			<false/>
+			<key>AppleImageConversion</key>
+			<false/>
+			<key>AppleImg4Verification</key>
+			<false/>
+			<key>AppleKeyMap</key>
+			<false/>
+			<key>AppleRtcRam</key>
+			<false/>
+			<key>AppleSecureBoot</key>
+			<false/>
+			<key>AppleSmcIo</key>
+			<false/>
+			<key>AppleUserInterfaceTheme</key>
+			<false/>
+			<key>DataHub</key>
+			<false/>
+			<key>DeviceProperties</key>
+			<false/>
+			<key>OSInfo</key>
+			<false/>
+			<key>UnicodeCollation</key>
 			<false/>
 		</dict>
 	</dict>
