@@ -1,5 +1,5 @@
 #!/bin/bash
 
-rm -rf /run/media/alice/OPENCORE/*
+rm -rf /run/media/alice/OPENCORE/EFI
 
-cp -r EFI /run/media/alice/OPENCORE
+cp -r EFI /run/media/alice/OPENCORE/
