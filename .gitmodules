@@ -1,3 +1,6 @@
 [submodule "utils/propertree"]
 	path = utils/propertree
 	url = git@github.com:corpnewt/ProperTree.git
+[submodule "utils/gibMacOS"]
+	path = utils/gibMacOS
+	url = git@github.com:corpnewt/gibMacOS.git
